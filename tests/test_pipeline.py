@@ -105,3 +105,13 @@ def test_fx_reference_table(scored):
 def test_limit_bal_eur_enrichment(scored):
     assert "limit_bal_eur" in scored.columns
     assert (scored["limit_bal_eur"] > 0).all()
+
+
+@pytest.mark.skipif(not (ROOT / "data" / "raw" / "creditcard.csv").exists(),
+                    reason="fraud dataset not present (git-ignored, see README)")
+def test_fraud_detection_at_scale():
+    from src import fraud
+    res = fraud.run()
+    assert res["n"] == 284807
+    assert res["auc"] > 0.8          # strong unsupervised separation of fraud
+    assert res["lift"] > 5           # flagged transactions much more fraudulent

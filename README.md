@@ -75,6 +75,17 @@ The raw dataset is not versioned (it is git-ignored). To reproduce:
 2. Convert it to CSV and place it at `data/raw/credit_default.csv`
    (columns kept as published; the pipeline handles renaming).
 
+## Large-volume fraud detection
+
+A second, separate demonstration (`src/fraud.py`) applies the same Isolation Forest
+method to the Credit Card Fraud dataset (284,807 transactions, 0.17% fraud). It shows
+the approach scales: AUC **0.945**, and flagged transactions are **10%** fraudulent
+against **0.17%** overall (lift x58). Run with `python -m src.fraud`.
+
+The dataset is git-ignored. Download `creditcard.csv` (e.g. from the
+[Kaggle MLG-ULB dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud))
+and place it at `data/raw/creditcard.csv`.
+
 ## Stack
 
 `Python` · `pandas` · `SQLite` (relational SQL) · `scikit-learn` (Isolation Forest) ·
@@ -90,5 +101,4 @@ the business codes).
 
 - [x] Extended quality module (column-by-column profiling, configurable business rules)
 - [x] Third source via a public API (FX enrichment, NT$ -> EUR via open.er-api.com)
-- [ ] Integration of the **Kaggle Credit Card Fraud (MLG-ULB, 284k transactions)**
-      dataset for large-volume anomaly detection
+- [x] Large-volume anomaly detection on the Credit Card Fraud dataset (284k transactions)
