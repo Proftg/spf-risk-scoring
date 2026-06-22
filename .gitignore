@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Regenerable pipeline outputs (never versioned)
+outputs/
+
+# Large / re-downloadable data (Kaggle, external sources)
+# Note: data/reference/ stays versioned (light business config, e.g. segments.json)
+data/raw/
+
+# Generated notebook exports (regenerable from the .ipynb)
+*.html
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
