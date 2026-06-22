@@ -1,0 +1,29 @@
+{
+  "_description": "Semi-structured reference source (JSON). Decodes the dataset's numeric codes into business labels and is joined to the relational data during ingestion. Simulates a reference table maintained by a business expert.",
+  "education_labels": {
+    "0": "unknown",
+    "1": "graduate school",
+    "2": "university",
+    "3": "high school",
+    "4": "other",
+    "5": "unknown",
+    "6": "unknown"
+  },
+  "marriage_labels": {
+    "0": "unknown",
+    "1": "married",
+    "2": "single",
+    "3": "other"
+  },
+  "sex_labels": {
+    "1": "male",
+    "2": "female"
+  },
+  "age_bands": [
+    {"label": "21-29", "min": 21, "max": 29},
+    {"label": "30-39", "min": 30, "max": 39},
+    {"label": "40-49", "min": 40, "max": 49},
+    {"label": "50-59", "min": 50, "max": 59},
+    {"label": "60+", "min": 60, "max": 200}
+  ]
+}
