@@ -84,3 +84,10 @@ def test_dashboard_filter_reduces_view(scored):
 def test_empty_filter_is_detectable(scored):
     view = scored[scored["education_label"] == "__missing__"]
     assert view.empty
+
+
+def test_quality_profile_covers_all_columns(scored):
+    with sqlite3.connect(DB_PATH) as con:
+        profile = quality.profile_columns(con)
+    assert len(profile) == 29           # 25 raw columns + 4 joined labels
+    assert (profile["nulls"] == 0).all()
