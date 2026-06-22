@@ -66,8 +66,8 @@ def run() -> pd.DataFrame:
     raw = model.score_samples(X)
     risk = 100 * (raw.max() - raw) / (raw.max() - raw.min())
 
-    scored = df[["ID", "default_flag", "education_label", "marriage_label",
-                 "sex_label", "age_band"]].copy()
+    scored = df[["ID", "default_flag", "limit_bal_eur", "education_label",
+                 "marriage_label", "sex_label", "age_band"]].copy()
     scored["risk_score"] = risk.round(1)
     scored["anomaly"] = (model.predict(X) == -1).astype(int)
     scored["risk_decile"] = pd.qcut(scored["risk_score"], 10,

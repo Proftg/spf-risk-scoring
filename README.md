@@ -17,7 +17,7 @@ pipeline component:
 
 | Job responsibility | Project component |
 |---|---|
-| Collect, clean and structure data from **multiple, heterogeneous sources** (structured + JSON) | `src/ingest.py`: relational CSV + JSON reference -> SQLite |
+| Collect, clean and structure data from **multiple, heterogeneous sources** (structured + JSON + API) | `src/ingest.py`: CSV + JSON -> SQLite; `src/enrich.py`: public FX API -> EUR column |
 | **Write and optimize SQL queries** | `sql/quality_checks.sql` + SQL queries in the pipeline |
 | **Quality, integrity, traceability** checks | `src/quality.py`: 6 SQL checks -> `quality_report.md` |
 | **Statistical and exploratory analysis** | Feature engineering + decile validation in `src/scoring.py` and the notebook |
@@ -32,6 +32,8 @@ pipeline component:
 data/raw/credit_default.csv  ->|
                                |-> ingest.py -> SQLite (clients + reference_segments)
 data/reference/segments.json ->|                   |
+                                                   |-> enrich.py (public FX API -> EUR + fx_reference)
+public FX API (open.er-api.com) ->|                |
                                                    |-> quality.py -> quality_report.md
                                                    |-> scoring.py -> scored_clients.csv
                                                                         |
@@ -86,7 +88,7 @@ the business codes).
 
 ## Roadmap
 
-- [ ] Extended quality module (column-by-column profiling, configurable business rules)
-- [ ] Third source via a public API (enrichment)
+- [x] Extended quality module (column-by-column profiling, configurable business rules)
+- [x] Third source via a public API (FX enrichment, NT$ -> EUR via open.er-api.com)
 - [ ] Integration of the **Kaggle Credit Card Fraud (MLG-ULB, 284k transactions)**
       dataset for large-volume anomaly detection
