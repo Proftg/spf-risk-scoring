@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src import ingest, quality, scoring
+from src import enrich, ingest, quality, scoring
 
 ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = ROOT / "outputs" / "risk.sqlite"
@@ -22,6 +22,7 @@ SCORED_CSV = ROOT / "outputs" / "scored_clients.csv"
 @pytest.fixture(scope="session")
 def scored() -> pd.DataFrame:
     ingest.run()
+    enrich.run()
     quality.run()
     return scoring.run()
 
@@ -89,5 +90,18 @@ def test_empty_filter_is_detectable(scored):
 def test_quality_profile_covers_all_columns(scored):
     with sqlite3.connect(DB_PATH) as con:
         profile = quality.profile_columns(con)
-    assert len(profile) == 29           # 25 raw columns + 4 joined labels
+    assert len(profile) == 30           # 25 raw + 4 labels + limit_bal_eur
     assert (profile["nulls"] == 0).all()
+
+
+def test_fx_reference_table(scored):
+    with sqlite3.connect(DB_PATH) as con:
+        fx = pd.read_sql("SELECT * FROM fx_reference", con)
+    assert len(fx) == 1
+    assert fx.loc[0, "rate"] > 0
+    assert fx.loc[0, "source"] in ("open.er-api.com", "fallback")
+
+
+def test_limit_bal_eur_enrichment(scored):
+    assert "limit_bal_eur" in scored.columns
+    assert (scored["limit_bal_eur"] > 0).all()

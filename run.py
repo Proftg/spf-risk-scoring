@@ -1,10 +1,10 @@
 """
-Full pipeline orchestrator: ingestion -> quality -> scoring.
+Full pipeline orchestrator: ingestion -> enrichment -> quality -> scoring.
 
 Usage: python run.py
 """
 
-from src import ingest, quality, scoring
+from src import enrich, ingest, quality, scoring
 
 
 def main() -> None:
@@ -12,6 +12,7 @@ def main() -> None:
     print("SPF RISK SCORING PIPELINE")
     print("=" * 60)
     ingest.run()
+    enrich.run()
     quality.run()
     scoring.run()
     print("=" * 60)

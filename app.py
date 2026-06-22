@@ -92,7 +92,7 @@ st.plotly_chart(fig, width='stretch')
 st.subheader("Top 20 highest-risk profiles")
 top = view.sort_values("risk_score", ascending=False).head(20)
 st.dataframe(
-    top[["ID", "risk_score", "anomaly", "default_flag",
+    top[["ID", "risk_score", "anomaly", "default_flag", "limit_bal_eur",
          "education_label", "marriage_label", "age_band"]],
     width='stretch', hide_index=True,
 )
