@@ -1,12 +1,7 @@
-"""
-Anomaly detection and risk scoring (Isolation Forest).
+"""Anomaly detection and risk scoring with Isolation Forest.
 
-Covers the task: "contribute to scoring and risk-detection models" and
-"statistical and exploratory analysis".
-
-Unsupervised approach: we flag atypical profiles without using the target.
-The default_flag target is used ONLY to validate that the risk score is
-meaningful (higher-risk profiles should show a higher default rate).
+The model is unsupervised and never sees default_flag. The target is only used to
+check that higher scores go with higher default rates.
 """
 
 from __future__ import annotations

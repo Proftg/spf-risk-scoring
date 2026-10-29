@@ -1,14 +1,8 @@
-"""
-Large-volume anomaly detection on the Credit Card Fraud dataset (284k transactions).
+"""Isolation Forest on the Credit Card Fraud dataset (284k transactions, 0.17% fraud),
+to show the method scales to a large imbalanced dataset.
 
-Separate demonstration from the credit-default pipeline: it shows the same
-unsupervised method (Isolation Forest) scales to a larger, highly imbalanced
-dataset (0.17% fraud).
-
-Dataset: data/raw/creditcard.csv (git-ignored, see README). Features V1..V28 are
-PCA components; Amount and Time are raw. The Class label is used only to validate.
-
-Run: python -m src.fraud
+Data: data/raw/creditcard.csv (git-ignored, see README). V1..V28 are PCA components.
+The Class label is only used to validate. Run: python -m src.fraud
 """
 
 from __future__ import annotations

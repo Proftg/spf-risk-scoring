@@ -1,12 +1,6 @@
-"""
-Third source: FX enrichment via a public API.
-
-Covers the job's "data from APIs" source type. The UCI dataset amounts are in
-New Taiwan Dollars (NT$). We fetch the TWD->EUR rate from a free public API and
-add an EUR column, expressing amounts in a Belgian context.
-
-Offline-safe: if the API is unreachable, a documented fallback rate is used so
-the pipeline stays reproducible.
+"""FX enrichment. The UCI amounts are in New Taiwan Dollars, so we fetch the TWD->EUR
+rate from a free public API and add an EUR column. If the API is unreachable, a
+fixed fallback rate keeps the pipeline reproducible.
 """
 
 from __future__ import annotations

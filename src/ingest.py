@@ -1,14 +1,5 @@
-"""
-Multi-source ingestion into a relational SQLite database.
-
-Covers the task: "collect, clean and structure data from multiple, heterogeneous
-sources (structured + semi-structured JSON)".
-
-Two sources:
-  1. data/raw/credit_default.csv     -> structured (proxy for financial data)
-  2. data/reference/segments.json    -> semi-structured (business reference)
-
-Result: a SQLite database with two tables joined on segment codes.
+"""Ingestion into SQLite from two sources: a structured CSV (credit_default.csv)
+and a semi-structured JSON reference (segments.json), joined on the segment codes.
 """
 
 from __future__ import annotations

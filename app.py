@@ -1,11 +1,4 @@
-"""
-Analytical dashboard: anomaly detection and risk scoring.
-
-Covers the task: "develop analytical reports and dashboards to identify trends,
-anomalies and risks".
-
-Launch: streamlit run app.py
-(requires running `python run.py` first)
+"""Dashboard on the scored clients. Run `python run.py` first, then `streamlit run app.py`.
 """
 
 from pathlib import Path

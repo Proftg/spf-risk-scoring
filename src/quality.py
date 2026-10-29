@@ -1,14 +1,5 @@
-"""
-SQL data quality checks + column profiling on the SQLite database.
-
-Covers the task: "write and optimize queries and quality checks, ensure data
-quality, integrity and traceability".
-
-Two parts:
-  1. RULES: configurable business rules (add a tuple to extend).
-  2. profile_columns: column-by-column profile (type, nulls, distinct, range).
-
-Produces a markdown report (outputs/quality_report.md).
+"""SQL quality checks and column profiling on the SQLite database, written to
+outputs/quality_report.md. RULES holds the business rules: add a tuple to add a check.
 """
 
 from __future__ import annotations
@@ -69,7 +60,7 @@ def profile_columns(con: sqlite3.Connection) -> pd.DataFrame:
             row |= {"min": round(s.min(), 1), "mean": round(s.mean(), 1),
                     "max": round(s.max(), 1)}
         rows.append(row)
-    return pd.DataFrame(rows).fillna("")
+    return pd.DataFrame(rows).astype(object).fillna("")
 
 
 def _table(headers: list[str], rows: list[list]) -> list[str]:
